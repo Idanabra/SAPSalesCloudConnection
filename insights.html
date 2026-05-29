@@ -370,7 +370,7 @@
     </div>
   </div>
 
-  <div id="thinking-bar" style="display:none; padding:8px 14px; background:#eff6ff; border-bottom:1px solid #dbeafe; font-size:11.5px; color:#3b82f6; display:none; align-items:center; gap:7px;">
+  <div id="thinking-bar" style="padding:8px 14px; background:#eff6ff; border-bottom:1px solid #dbeafe; font-size:11.5px; color:#3b82f6; align-items:center; gap:7px;">
     <span style="animation:spin 1s linear infinite; display:inline-block; font-size:13px;">⟳</span>
     <span id="thinking-text">מתחבר ל-SAP...</span>
   </div>
@@ -508,6 +508,7 @@ function setStatus(state, msg) {
   } else {
     bar.style.display = 'none';
   }
+  bar.classList.toggle('visible', state === 'thinking');
 }
 
 // ─────────────────────────────────────────────
@@ -912,9 +913,9 @@ async function fetchAndAnalyze() {
 // ─────────────────────────────────────────────
 loadSettings();
 applyLocale();
-setStatus('idle');
 
 if (!settings.sapUrl || !settings.sapUser || !settings.sapPass || !settings.geminiToken) {
+  setStatus('idle');
   openSettings();
 } else {
   fetchAndAnalyze();
